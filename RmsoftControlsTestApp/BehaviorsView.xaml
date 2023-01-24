@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="RmsoftControlsTestApp.BehaviorsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RmsoftControlsTestApp"
+             xmlns:rmcontrols="http://schemas.rmsoft.fi/controls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <local:SomeBindableObject x:Key="object1" DecimalValue="5"/>
+
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="DecimalInputBehavior">
+
+            <StackPanel Margin="20">
+                <Label Content="Decimal digits:"/>
+                <TextBox MaxLength="5" x:Name="decimalDigitsInput" Text="{Binding ElementName=decimalInputBehavior1, UpdateSourceTrigger=PropertyChanged, Path=DecimalDigits, Mode=OneWayToSource}">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:DecimalInputBehavior DecimalDigits="0" DisableNegativeNumbers="True"/>
+                        <rmcontrols:TextBoxEmptyDefaultValueBehavior DefaultValue="2"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label Content="Decimal input:"/>
+                <TextBox Grid.Column="1" Margin="0,5,0,0" DataContext="{DynamicResource object1}" Text="{Binding DecimalValue}">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:DecimalInputBehavior x:Name="decimalInputBehavior1"/>
+                        <rmcontrols:TextBoxEmptyDefaultValueBehavior DefaultValue="0"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label Content="Int input (Default=7):"/>
+                <TextBox Grid.Column="1" Margin="0,5,0,0" DataContext="{DynamicResource object1}" Text="{Binding IntValue}">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:DecimalInputBehavior DecimalDigits="0"/>
+                        <rmcontrols:TextBoxEmptyDefaultValueBehavior>
+                            <rmcontrols:TextBoxEmptyDefaultValueBehavior.DefaultValue>
+                                <system:Int32>7</system:Int32>
+                            </rmcontrols:TextBoxEmptyDefaultValueBehavior.DefaultValue>
+                        </rmcontrols:TextBoxEmptyDefaultValueBehavior>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label Content="Double input (StringFormat=F2, Default=0.66):"/>
+                <TextBox Grid.Column="1" Margin="0,5,0,0" DataContext="{DynamicResource object1}" Text="{Binding DoubleValue, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:DecimalInputBehavior/>
+                        <rmcontrols:TextBoxEmptyDefaultValueBehavior>
+                            <rmcontrols:TextBoxEmptyDefaultValueBehavior.DefaultValue>
+                                <system:Double>0.66</system:Double>
+                            </rmcontrols:TextBoxEmptyDefaultValueBehavior.DefaultValue>
+                        </rmcontrols:TextBoxEmptyDefaultValueBehavior>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Header="SelectAllTextOnFocusBehavior">
+
+            <StackPanel Margin="20">
+                <TextBox Text="Text1">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:SelectAllTextOnFocusBehavior/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <TextBox Margin="0,5,0,0" Text="Text2">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:SelectAllTextOnFocusBehavior/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <TextBox Margin="0,5,0,0" Text="Text3">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:SelectAllTextOnFocusBehavior/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <TextBox Margin="0,5,0,0" Text="Text4">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:SelectAllTextOnFocusBehavior/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+
+        </GroupBox>
+
+    </Grid>
+
+</UserControl>

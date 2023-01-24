@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="RmsoftControlsTestApp.DialogsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:RmsoftControlsTestApp.Converters"
+             xmlns:local="clr-namespace:RmsoftControlsTestApp"
+             xmlns:resources="clr-namespace:RmsoftControlsTestApp.Properties"
+             xmlns:collections="clr-namespace:System.Collections.Specialized;assembly=System"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+
+    <UserControl.Resources>
+        <converters:EmptyToNullConverter x:Key="emptyToNullConverter1"/>
+
+        <DataTemplate x:Key="styleDataTemplate1" DataType="Style">
+            <TextBlock Text="{Binding Key}"/>
+        </DataTemplate>
+
+        <collections:ListDictionary x:Key="dialogWindowStyles">
+            <x:Null x:Key="windowStyleDefault"/>
+            <Style x:Key="windowStyle1" TargetType="Window" BasedOn="{StaticResource {x:Type Window}}">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Background" Value="Beige"/>
+            </Style>
+            <Style x:Key="windowStyle2" TargetType="Window" BasedOn="{StaticResource {x:Type Window}}">
+                <Setter Property="FontSize" Value="26"/>
+                <Setter Property="Foreground" Value="Beige"/>
+                <Setter Property="Background" Value="Black"/>
+            </Style>
+        </collections:ListDictionary>
+
+        <collections:ListDictionary x:Key="dialogButtonStyles">
+            <x:Null x:Key="buttonStyleDefault"/>
+            <Style x:Key="buttonStyle1" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="FontSize" Value="26"/>
+            </Style>
+            <Style x:Key="buttonStyle2" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="FontSize" Value="32"/>
+            </Style>
+        </collections:ListDictionary>
+
+    </UserControl.Resources>
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="800" MaxHeight="800" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DialogsView}}}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Dialog title:" Target="{Binding ElementName=titleTextInput}"/>
+            <TextBox Grid.Column="1" x:Name="titleTextInput" Text="{Binding DialogTitle, Mode=TwoWay, Converter={StaticResource emptyToNullConverter1}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="1" Margin="0,3,0,0" Content="Ok button title:" Target="{Binding ElementName=okButtonTitleTextInput}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,3,0,0" x:Name="okButtonTitleTextInput" Text="{Binding OkButtonTitle, Mode=TwoWay, Converter={StaticResource emptyToNullConverter1}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="2" Margin="0,3,0,0" Content="Dialog text:" Target="{Binding ElementName=dialogTextInput}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,3,0,0" x:Name="dialogTextInput" Text="{Binding DialogText, Mode=TwoWay, Converter={StaticResource emptyToNullConverter1}, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" MinLines="2" MaxLines="4"/>
+            <CheckBox Grid.Row="3" Margin="0,3,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Content="Ok button is default" IsChecked="{Binding OkButtonIsDefault, Mode=TwoWay}"/>
+            <Label Grid.Row="4" Margin="0,3,0,0" Content="Cancel button title:" Target="{Binding ElementName=cancelButtonTitleTextInput}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,3,0,0" x:Name="cancelButtonTitleTextInput" Text="{Binding CancelButtonTitle, Mode=TwoWay, Converter={StaticResource emptyToNullConverter1}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="5" Margin="0,3,0,0" Content="Dialog style:" Target="{Binding ElementName=dialogWindowStyleSelector}"/>
+            <ComboBox Grid.Row="5" Grid.Column="1" Margin="0,3,0,0" x:Name="dialogWindowStyleSelector" ItemsSource="{Binding Source={StaticResource dialogWindowStyles}}" SelectedValue="{Binding SelectedDialogWindowStyle, Mode=TwoWay}" DisplayMemberPath="Key" SelectedValuePath="Value"/>
+            <Label Grid.Row="6" Margin="0,3,0,0" Content="Dialog button style:" Target="{Binding ElementName=dialogButtonStyleSelector}"/>
+            <ComboBox Grid.Row="6" Grid.Column="1" Margin="0,3,0,0" x:Name="dialogButtonStyleSelector" ItemsSource="{Binding Source={StaticResource dialogButtonStyles}}" SelectedValue="{Binding SelectedDialogButtonStyle, Mode=TwoWay}" DisplayMemberPath="Key" SelectedValuePath="Value"/>
+        </Grid>
+
+        <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+            <StackPanel>
+                <Label Content="Dialog buttons:" Target="{Binding ElementName=dialogButtonsSelector}"/>
+                <ComboBox MinWidth="120" x:Name="dialogButtonsSelector" ItemsSource="{Binding DialogButtons}" SelectedItem="{Binding SelectedDialogButtons, Mode=TwoWay}" SelectedValue="{Binding Source={x:Static resources:Settings.Default}, Path=SelectedDialogButtons, Mode=OneWayToSource}"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Dialog buttons:" Target="{Binding ElementName=dialogTypeSelector}"/>
+                <ComboBox Margin="5,0,0,0" Width="120" x:Name="dialogTypeSelector" ItemsSource="{Binding DialogTypes}" SelectedItem="{Binding SelectedDialogType, Mode=TwoWay}" SelectedValue="{Binding Source={x:Static resources:Settings.Default}, Path=SelectedDialogType, Mode=OneWayToSource}"/>
+            </StackPanel>
+
+            <Button Margin="5,0,0,0" Padding="5" VerticalAlignment="Bottom" MinWidth="100" MinHeight="35" x:Name="showDialogButton" Content="_Show dialog" IsDefault="True" Click="ShowDialogButton_Click"/>
+        </StackPanel>
+
+        <Border Margin="0,5,5,0" BorderBrush="Black" BorderThickness="0.5"/>
+        <TextBlock Text="{Binding DialogResult, StringFormat=Dialog result:{0}, TargetNullValue=Not shown}"/>
+    </StackPanel>
+
+
+</UserControl>

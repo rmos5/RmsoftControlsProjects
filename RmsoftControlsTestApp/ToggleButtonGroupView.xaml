@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="RmsoftControlsTestApp.ToggleButtonGroupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:rmcontrols="http://schemas.rmsoft.fi/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+
+    <UserControl.Resources>
+
+        <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+        <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="ToggleButton">
+            <StackPanel>
+                <ToggleButton rmcontrols:ToggleButtonGroup.Group="Group1"  Content="ToggleButton1"/>
+                <ToggleButton rmcontrols:ToggleButtonGroup.Group="Group1" Content="ToggleButton2"/>
+                <ToggleButton rmcontrols:ToggleButtonGroup.Group="Group1" Content="ToggleButton3"/>
+                <ToggleButton rmcontrols:ToggleButtonGroup.Group="Group1" Content="ToggleButton4"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Margin="20,0" Header="CheckBox">
+            <StackPanel>
+                <CheckBox rmcontrols:ToggleButtonGroup.Group="Group2"  Content="CheckBox1"/>
+                <CheckBox rmcontrols:ToggleButtonGroup.Group="Group2" Content="CheckBox2"/>
+                <CheckBox rmcontrols:ToggleButtonGroup.Group="Group2" Content="CheckBox3"/>
+                <CheckBox rmcontrols:ToggleButtonGroup.Group="Group2" Content="CheckBox4"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Column="2" Margin="20,0" Header="RadioButton">
+            <StackPanel>
+                <RadioButton rmcontrols:ToggleButtonGroup.Group="Group3"  Content="RadioButton1"/>
+                <RadioButton rmcontrols:ToggleButtonGroup.Group="Group3" Content="RadioButton2"/>
+                <RadioButton rmcontrols:ToggleButtonGroup.Group="Group3" Content="RadioButton3"/>
+                <RadioButton rmcontrols:ToggleButtonGroup.Group="Group3" Content="RadioButton4"/>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+
+</UserControl>

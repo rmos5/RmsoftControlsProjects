@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="RmsoftControlsTestApp.TabControlStateSelectorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RmsoftControlsTestApp"
+             xmlns:rmcontrols="http://schemas.rmsoft.fi/controls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <ObjectDataProvider x:Key="someStates1Provider" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:SomeStates1"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+    </UserControl.Resources>
+    
+    <Grid>
+
+        <TabControl rmcontrols:TabControlStateSelector.ContainerState="{Binding SelectedItem, Mode=TwoWay, ElementName=someStates1Selector}">
+
+            <TabControl.Resources>
+
+                <Style x:Key="headerStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="FontSize" Value="45"/>
+                    <Setter Property="Margin" Value="50"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                </Style>
+                
+            </TabControl.Resources>
+
+            <TabItem Header="{x:Static local:SomeStates1.None}" rmcontrols:TabControlStateSelector.ItemState="{x:Static local:SomeStates1.None}">
+                <TextBlock Style="{DynamicResource headerStyle}">TabItem 0</TextBlock>
+            </TabItem>
+
+            <TabItem Visibility="Collapsed" Header="{x:Static local:SomeStates1.State1}" rmcontrols:TabControlStateSelector.ItemState="{x:Static local:SomeStates1.State1}">
+                <TextBlock Style="{DynamicResource headerStyle}">TabItem 1</TextBlock>
+            </TabItem>
+
+            <TabItem Header="{x:Static local:SomeStates1.State2}" rmcontrols:TabControlStateSelector.ItemState="{x:Static local:SomeStates1.State2}">
+                <TextBlock Style="{DynamicResource headerStyle}">TabItem 2</TextBlock>
+            </TabItem>
+
+            <TabItem Visibility="Collapsed" Header="{x:Static local:SomeStates1.State3}" rmcontrols:TabControlStateSelector.ItemState="{x:Static local:SomeStates1.State3}">
+                <TextBlock Style="{DynamicResource headerStyle}">TabItem 3</TextBlock>
+            </TabItem>
+
+            <TabItem Header="{x:Static local:SomeStates1.StateX}" rmcontrols:TabControlStateSelector.ItemState="{x:Static local:SomeStates1.StateX}">
+                <TextBlock Style="{DynamicResource headerStyle}">TabItem 4</TextBlock>
+            </TabItem>
+
+        </TabControl>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" Orientation="Horizontal">
+            <Label>Select state:</Label>
+            <ListBox Width="150" x:Name="someStates1Selector" ItemsSource="{Binding Source={StaticResource someStates1Provider}}"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

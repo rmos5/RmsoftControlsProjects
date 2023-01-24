@@ -1,0 +1,39 @@
+﻿<Window x:Class="RmsoftControls.Dialogs.Dialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RmsoftControls.Dialogs"
+        mc:Ignorable="d"
+        Title="Dialog" 
+        MinHeight="300" MinWidth="400"
+        MaxHeight="400" MaxWidth="600"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner" 
+        ShowInTaskbar="False" ResizeMode="NoResize" FontSize="16">
+
+    <Window.Resources>
+        <local:DialogButtonsVisibilityConverter x:Key="dialogButtonsVisibilityConverter1"/>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Image Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="32" Height="32" x:Name="headerIcon" Source="{x:Static local:Icons.InformationIcon32}"/>
+
+        <Grid>
+            <TextBox Margin="50,50,50,20" x:Name="textContainer" IsReadOnly="True" TextWrapping="Wrap" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Dialog}}}" BorderThickness="0" BorderBrush="{x:Null}" Background="Transparent" VerticalContentAlignment="Center" HorizontalAlignment="Center" MaxLines="10"/>
+            <ContentControl Margin="5" x:Name="contentContainer" IsTabStop="False"/>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Dialog}}}">
+            <Button MinWidth="75" MinHeight="23" x:Name="okButton" Content="{Binding OkButtonTitle}" Visibility="{Binding Buttons, Converter={StaticResource dialogButtonsVisibilityConverter1}, ConverterParameter={x:Static local:DialogButtons.Ok}}" Click="OkButton_Click"/>
+            <Button Margin="5,0,0,0" MinWidth="75" MinHeight="23" x:Name="cancelButton" Content="{Binding CancelButtonTitle}" Visibility="{Binding Buttons, Converter={StaticResource dialogButtonsVisibilityConverter1}, ConverterParameter={x:Static local:DialogButtons.Cancel}}" IsCancel="True" Click="CancelButton_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

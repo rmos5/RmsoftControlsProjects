@@ -1,0 +1,25 @@
+﻿<Application x:Class="RmsoftControlsTestApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:rmcontrols="http://schemas.rmsoft.fi/controls"
+             xmlns:converters="clr-namespace:RmsoftControlsTestApp.Converters"
+             StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+
+        <!-- sample input capture sequences, adjust for your testing keyboard device (e.g. barcode reader) -->
+        <rmcontrols:KeyInputCaptureCollection x:Key="keyInputCaptureCollection">
+            <rmcontrols:KeyInputCaptureItem StartKey="L" EndKey="Return" StartKeyModifiers="Ctrl+Alt"/>
+            <rmcontrols:KeyInputCaptureItem StartKey="F11" EndKey="Return"/>
+            <rmcontrols:KeyInputCaptureItem StartKey="F3" EndKey="F3"/>
+            <rmcontrols:KeyInputCaptureItem StartKey="F5"/>
+            <rmcontrols:KeyInputCaptureItem StartKey="C" StartKeyModifiers="Alt"/>
+            <rmcontrols:KeyInputCaptureItem StartKey="K" StartKeyModifiers="Ctrl+Alt"/>
+        </rmcontrols:KeyInputCaptureCollection>
+
+        <converters:CultureInfoConverter x:Key="cultureInfoConverter1"/>
+        <converters:InputCaptureTimeoutConverter x:Key="inputCaptureTimeoutConverter1"/>
+
+    </Application.Resources>
+
+</Application>

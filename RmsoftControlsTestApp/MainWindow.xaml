@@ -1,0 +1,116 @@
+﻿<Window x:Class="RmsoftControlsTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RmsoftControlsTestApp"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+        xmlns:coll="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:resources="clr-namespace:RmsoftControlsTestApp.Properties"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:rmcontrols="http://schemas.rmsoft.fi/controls"
+        mc:Ignorable="d"
+        Title="{Binding Source={x:Static resources:Resources.AppTitle}}" 
+        MinHeight="700" Height="640" MinWidth="850" Width="850"
+        FontSize="{Binding SelectedItem, ElementName=fontSizeSelector}"
+        rmcontrols:KeyInputCapture.InputCaptureItems="{DynamicResource keyInputCaptureCollection}"
+        rmcontrols:KeyInputCapture.InputCaptures="{Binding InputCaptures, ElementName=keyInputCaptureView}"
+        rmcontrols:KeyInputCapture.InputCaptureStarted="Window_InputCaptureStarted"
+        rmcontrols:KeyInputCapture.InputCaptureCompleted="Window_InputCaptureCompleted">
+
+    <Window.Resources>
+
+        <CollectionViewSource x:Key="cultureDataViewSource">
+            <CollectionViewSource.SortDescriptions>
+                <componentModel:SortDescription PropertyName="EnglishName"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+    </Window.Resources>
+
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Orientation="Horizontal" x:Name="toolbar1">
+            <StackPanel Margin="3">
+                <TextBlock Text="Language:"/>
+                <ComboBox  MinWidth="180" x:Name="languageSelector" IsReadOnly="False" ItemsSource="{Binding Source={StaticResource cultureDataViewSource}}" SelectionChanged="LanguageSelector_SelectionChanged" SelectedItem="{Binding Source={x:Static resources:Settings.Default}, Path=SelectedCultureInfo, Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type globalization:CultureInfo}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding EnglishName}"/>
+                                <TextBlock Text="{Binding TextInfo.CultureName, StringFormat={} ({0})}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Margin="3">
+                <TextBlock Text="Font size:"/>
+                <ComboBox  MinWidth="120" x:Name="fontSizeSelector" SelectedItem="{Binding Source={x:Static resources:Settings.Default}, Path=SelectedFontSize, Mode=TwoWay}">
+                    <ComboBox.ItemsSource>
+                        <coll:ArrayList>
+                            <sys:Double>12</sys:Double>
+                            <sys:Double>14</sys:Double>
+                            <sys:Double>16</sys:Double>
+                            <sys:Double>18</sys:Double>
+                            <sys:Double>20</sys:Double>
+                            <sys:Double>22</sys:Double>
+                            <sys:Double>24</sys:Double>
+                            <sys:Double>26</sys:Double>
+                            <sys:Double>28</sys:Double>
+                            <sys:Double>30</sys:Double>
+                        </coll:ArrayList>
+                    </ComboBox.ItemsSource>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="3">
+                <TextBlock Text="Theme:"/>
+                <ComboBox MinWidth="120" x:Name="appThemeSelector" ItemsSource="{Binding Source={x:Static resources:Settings.Default}, Path=AppThemeResourceUris}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding Source={x:Static resources:Settings.Default}, Path=AppThemeResourceUri, Mode=OneWay}" SelectionChanged="AppThemeSelector_SelectionChanged"/>
+            </StackPanel>
+        </WrapPanel>
+
+        <TabControl Grid.Row="1" Margin="0,5,0,0" SelectedIndex="{Binding Source={x:Static resources:Settings.Default}, Path=SelectedViewIndex}">
+            <TabItem Header="LoadingAnimation">
+                <local:LoadingAnimationView/>
+            </TabItem>
+            <TabItem Header="DateTimePicker">
+                <local:DateTimePickerView/>
+            </TabItem>
+            <TabItem Header="CommitKeyTextBox">
+                <local:CommitKeyTextBoxView/>
+            </TabItem>
+            <TabItem Header="TextBoxPro">
+                <local:TextBoxProView/>
+            </TabItem>
+            <TabItem Header="Dialog">
+                <local:DialogsView/>
+            </TabItem>
+            <TabItem Header="PdPosKeyboard">
+                <local:PdPosKeyboardView/>
+            </TabItem>
+            <TabItem Header="ToggleButtonGroup">
+                <local:ToggleButtonGroupView/>
+            </TabItem>
+            <TabItem Header="TabControlStateSelector">
+                <local:TabControlStateSelectorView/>
+            </TabItem>
+            <TabItem Header="KeyInputDetect/Capture">
+                <local:KeyInputCaptureView Grid.Row="1" Margin="0,5,0,0" x:Name="keyInputCaptureView"/>
+            </TabItem>
+            <TabItem Header="TextBoxEmptyDefaultValue">
+                <local:TextBoxEmptyDefaultValueView/>
+            </TabItem>
+            <TabItem Header="Behaviors">
+                <local:BehaviorsView/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

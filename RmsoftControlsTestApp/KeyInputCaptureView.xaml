@@ -1,0 +1,316 @@
+﻿<UserControl x:Class="RmsoftControlsTestApp.KeyInputCaptureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:RmsoftControlsTestApp.Converters"
+             xmlns:rmcontrols="http://schemas.rmsoft.fi/controls"
+             xmlns:coll="clr-namespace:System.Collections;assembly=mscorlib"
+             xmlns:local="clr-namespace:RmsoftControlsTestApp"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             rmcontrols:KeyInputCapture.IsCaptureEventScope="True"
+             rmcontrols:KeyInputCapture.InputCaptureStarted="UserControl_InputCaptureStarted"
+             rmcontrols:KeyInputCapture.InputCaptureCompleted="UserControl_InputCaptureCompleted">
+
+    <UserControl.Resources>
+
+        <CollectionViewSource x:Key="keyInputCaptureCollectionViewSource" Source="{DynamicResource keyInputCaptureCollection}"/>
+
+        <coll:ArrayList x:Key="targetUpdateModesCollection">
+            <rmcontrols:TargetUpdateModes>Default</rmcontrols:TargetUpdateModes>
+            <rmcontrols:TargetUpdateModes>SingleFocused</rmcontrols:TargetUpdateModes>
+            <rmcontrols:TargetUpdateModes>None</rmcontrols:TargetUpdateModes>
+        </coll:ArrayList>
+
+        <converters:ToStringConverter x:Key="toStringConverter1"/>
+
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" rmcontrols:KeyInputCapture.IsCaptureEventScope="True">
+
+            <StackPanel.Resources>
+
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="15,10"/>
+                </Style>
+
+            </StackPanel.Resources>
+
+            <StackPanel Orientation="Horizontal">
+
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding (rmcontrols:KeyInputCapture.DisableUpdateTargets), RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}" Content="DisableUpdateTargets"/>
+
+                <rmcontrols:TextBoxPro Margin="5,0,0,0" VerticalAlignment="Center" Watermark="Capture timeout (milliseconds):" x:Name="keyInputCaptureTimeoutInput" Text="{Binding (rmcontrols:KeyInputCapture.InputCaptureTimeoutMilliseconds), RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}, Converter={StaticResource inputCaptureTimeoutConverter1}, TargetNullValue=''}">
+                    <i:Interaction.Behaviors>
+                        <rmcontrols:DecimalInputBehavior DisableNegativeNumbers="True" DecimalDigits="0"/>
+                    </i:Interaction.Behaviors>
+                </rmcontrols:TextBoxPro>
+
+            </StackPanel>
+
+            <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding (rmcontrols:KeyInputCapture.PassEndKeyToTargets), RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}" Content="PassEndKeyToTargets"/>
+
+                <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+
+                    <Grid>
+
+                        <Grid.Background>
+                            <SolidColorBrush Color="LightGray" x:Name="inputCaptureStartedBrush"/>
+                        </Grid.Background>
+
+                        <TextBlock Text="{Binding (rmcontrols:KeyInputCapture.InputCaptureStartedCount), RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}"/>
+
+                    </Grid>
+
+                    <Grid Margin="5,0,0,0">
+
+                        <Grid.Background>
+                            <SolidColorBrush Color="LightGray" x:Name="inputCaptureCompletedBrush"/>
+                        </Grid.Background>
+
+                        <TextBlock Text="{Binding (rmcontrols:KeyInputCapture.InputCaptureCompletedCount), RelativeSource={RelativeSource FindAncestor, AncestorType=local:MainWindow}}"/>
+
+                    </Grid>
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel.Triggers>
+
+                <EventTrigger RoutedEvent="rmcontrols:KeyInputCapture.InputCaptureStarted">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames
+                                        Storyboard.TargetName="inputCaptureStartedBrush"
+                                        Storyboard.TargetProperty="(SolidColorBrush.Color)">
+                                <LinearColorKeyFrame Value="Orange" KeyTime="0:0:0.5"/>
+                                <LinearColorKeyFrame Value="LightGray" KeyTime="0:0:0.5"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="rmcontrols:KeyInputCapture.InputCaptureCompleted">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames
+                                        Storyboard.TargetName="inputCaptureCompletedBrush"
+                                        Storyboard.TargetProperty="(SolidColorBrush.Color)">
+                                <LinearColorKeyFrame Value="Green" KeyTime="0:0:0.5"/>
+                                <LinearColorKeyFrame Value="LightGray" KeyTime="0:0:0.5"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+            </StackPanel.Triggers>
+
+        </StackPanel>
+
+        <GroupBox Grid.Row="1" Header="Input captures" DataContext="{StaticResource keyInputCaptureCollectionViewSource}">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+
+                    <Label Content="Configured keyboard input captures:"/>
+                    <ItemsControl Margin="0,5,0,0" Focusable="False" ItemsSource="{Binding}" BorderThickness="0.5" BorderBrush="{StaticResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+
+                        <ItemsControl.ItemTemplate>
+
+                            <DataTemplate DataType="rmcontrols:KeyInputCaptureItem">
+
+                                <Border BorderBrush="{StaticResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" BorderThickness="0,0,0,0.5">
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <StackPanel.Resources>
+
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="Margin" Value="3,0,0,0"/>
+                                            </Style>
+
+                                        </StackPanel.Resources>
+
+                                        <StackPanel>
+
+                                            <Label Content="StartKey"/>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Modifiers:"/>
+                                                <TextBlock Text="{Binding StartKeyModifiers, Converter={StaticResource toStringConverter1}}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Key:"/>
+                                                <TextBlock Text="{Binding StartKey, Converter={StaticResource toStringConverter1}}"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <StackPanel Margin="5,0,0,0">
+
+                                            <Label Content="EndKey"/>
+
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <Label Content="Modifiers:"/>
+                                                <TextBlock Text="{Binding EndKeyModifiers, Converter={StaticResource toStringConverter1}}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Key:"/>
+                                                <TextBlock Text="{Binding EndKey, Converter={StaticResource toStringConverter1}}"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                            </DataTemplate>
+
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+
+                </StackPanel>
+
+                <ListBox Grid.Row="2" Margin="0,5,0,0" ItemsSource="{Binding InputCaptures, RelativeSource={RelativeSource FindAncestor, AncestorType=local:KeyInputCaptureView}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="inputCapturesSelector" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </Grid>
+
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="KeyInputCapture" Padding="10">
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+
+                <StackPanel>
+
+                    <StackPanel Margin="0,5,0,0">
+
+                        <Label>
+                            <TextBlock Text="Below is a TextBoxPro set as a target for keyboard input capture (SelectAllTextOnEnterKeyBehavior):"/>
+                        </Label>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="120"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <ComboBox x:Name="targetUpdateModeSelector1" ItemsSource="{DynamicResource targetUpdateModesCollection}" SelectedIndex="1"/>
+
+                            <rmcontrols:TextBoxPro Grid.Column="1" Margin="5,0,0,0" rmcontrols:KeyInputCapture.TargetUpdateMode="{Binding SelectedItem, ElementName=targetUpdateModeSelector1}" Watermark="Type in key input..." x:Name="textBoxPro1">
+
+                                <i:Interaction.Behaviors>
+                                    <rmcontrols:SelectAllTextOnEnterKeyBehavior/>
+                                </i:Interaction.Behaviors>
+
+                                <rmcontrols:TextBoxPro.InputBindings>
+                                    <KeyBinding Key="Return" Command="{Binding KeyInputCaptureCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=local:KeyInputCaptureView}}" CommandParameter="{Binding Text, ElementName=textBoxPro1}"/>
+                                </rmcontrols:TextBoxPro.InputBindings>
+
+                            </rmcontrols:TextBoxPro>
+
+                        </Grid>
+
+                        <Label>
+                            <TextBlock Text="Below is a TextBox set as a target for keyboard input capture:"/>
+                        </Label>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="120"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <ComboBox x:Name="targetUpdateModeSelector2" ItemsSource="{DynamicResource targetUpdateModesCollection}" SelectedIndex="0"/>
+
+                            <TextBox Grid.Column="1" Margin="5,0,0,0" rmcontrols:KeyInputCapture.TargetUpdateMode="{Binding SelectedItem, ElementName=targetUpdateModeSelector2}" x:Name="textBox1">
+
+                                <TextBox.InputBindings>
+                                    <KeyBinding Key="Return" Command="{Binding KeyInputCaptureCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=local:KeyInputCaptureView}}" CommandParameter="{Binding Text, ElementName=textBox1}"/>
+                                </TextBox.InputBindings>
+
+                            </TextBox>
+
+                        </Grid>
+
+                    </StackPanel>
+
+                    <StackPanel  Margin="0,5,0,0">
+
+                        <Label>
+                            <TextBlock Text="Below is a TextBlock set as a target for keyboard input capture:"/>
+                        </Label>
+
+                        <Grid>
+                            <TextBlock FontSize="24" FontWeight="DemiBold" Foreground="Navy" Padding="5" rmcontrols:KeyInputCapture.TargetUpdateMode="Default"/>
+                            <Rectangle Stroke="Gray" StrokeThickness="0.5" StrokeDashArray="5 5"/>
+                        </Grid>
+
+
+                    </StackPanel>
+
+                    <StackPanel  Margin="0,5,0,0">
+
+                        <Label>
+                            <TextBlock Text="Below is a ContentControl set as a target  for keyboard input capture:"/>
+                        </Label>
+
+                        <Grid MinHeight="24">
+                            <ContentControl FontSize="24" FontWeight="DemiBold" Padding="5" rmcontrols:KeyInputCapture.TargetUpdateMode="Default"/>
+                            <Rectangle Stroke="Gray" StrokeThickness="0.5" StrokeDashArray="5 5"/>
+                        </Grid>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </GroupBox>
+
+    </Grid>
+
+</UserControl>

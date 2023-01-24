@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="RmsoftControls.PdPosKeyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RmsoftControls"
+             xmlns:winput="clr-namespace:System.Windows.Input;assembly=WindowsBase"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type local:PdPosKeyboard}}}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Focusable="False"/>
+            <RowDefinition Focusable="False"/>
+            <RowDefinition Focusable="False"/>
+            <RowDefinition Focusable="False"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Focusable="False"/>
+            <ColumnDefinition Focusable="False"/>
+            <ColumnDefinition Focusable="False"/>
+            <ColumnDefinition Focusable="False"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="0" Grid.Column="0" Content="7" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D7}" Focusable="False"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="8" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D8}" Focusable="False"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="9" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D9}" Focusable="False"/>
+        <Button Grid.Row="0" Grid.Column="4" Content="{Binding BackKeyTitle}" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.Back}" Focusable="False"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="4" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D4}" Focusable="False"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="5" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D5}" Focusable="False"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="6" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D6}" Focusable="False"/>
+        <Button Grid.Row="1" Grid.Column="4" Content="*" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.Multiply}" Focusable="False"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="1" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D1}" Focusable="False"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="2" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D2}" Focusable="False"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="3" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D3}" Focusable="False"/>
+        <Button Grid.Row="2" Grid.Column="4" Content="{Binding ClearKeyTitle}" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.Clear}" Focusable="False"/>
+        <Button Grid.Row="3" Grid.Column="0" Content="0" Grid.ColumnSpan="2" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.D0}" Focusable="False"/>
+        <Button Grid.Row="3" Grid.Column="2" Content="{Binding NumberDecimalSeparator}" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.Decimal}" Focusable="False"/>
+        <Button Grid.Row="3" Grid.Column="4" Content="{Binding EnterKeyTitle, Mode=OneWay}" local:PdPosKeyButton.KeyboardKey="{x:Static winput:Key.Return}" Focusable="False"/>
+
+    </Grid>
+
+</UserControl>

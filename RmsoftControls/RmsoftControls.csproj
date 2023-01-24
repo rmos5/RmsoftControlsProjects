@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4051D6DC-312E-4C0D-83F4-E80C4128D2D8}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>RmsoftControls</RootNamespace>
+    <AssemblyName>RmsoftControls</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AnimatedControls\Block.xaml.cs">
+      <DependentUpon>Block.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnimatedControls\LoadingAnimation.xaml.cs">
+      <DependentUpon>LoadingAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnimatedControls\ControlResources.Designer.cs">
+      <DependentUpon>ControlResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="AnimatedControls\ControlResources.fi-FI.Designer.cs">
+      <DependentUpon>ControlResources.fi-FI.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Behaviors\ClearTextOnEnterKeyBehavior.cs" />
+    <Compile Include="Behaviors\ComboBoxDropDownOnKeyboardFocusBehavior.cs" />
+    <Compile Include="Behaviors\DecimalInputBehavior.cs" />
+    <Compile Include="Behaviors\DefaultFocusedBehavior.cs" />
+    <Compile Include="Behaviors\DisableCutCopyPasteBehavior.cs" />
+    <Compile Include="Behaviors\KeyEventRoutes.cs" />
+    <Compile Include="Behaviors\KeyInputCaptureBaseBehavior.cs" />
+    <Compile Include="Behaviors\KeyInputCaptureSetFocusedBehavior.cs" />
+    <Compile Include="Behaviors\KeyInputDetectBaseBehavior.cs" />
+    <Compile Include="Behaviors\KeyInputDetectSetFocusedBehavior.cs" />
+    <Compile Include="Behaviors\SelectAllTextOnFocusBehavior.cs" />
+    <Compile Include="Behaviors\SelectAllTextOnEnterKeyBehavior.cs" />
+    <Compile Include="Behaviors\TextBoxEmptyDefaultValueBehavior.cs" />
+    <Compile Include="Converters\FontSizeScaleConverter.cs" />
+    <Compile Include="DateTimeControls\ControlResources.Designer.cs">
+      <DependentUpon>ControlResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DateTimeControls\ControlResources.et-EE.Designer.cs">
+      <DependentUpon>ControlResources.et-EE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DateTimeControls\ControlResources.fi-FI.Designer.cs">
+      <DependentUpon>ControlResources.fi-FI.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DateTimeControls\DateTimePicker.cs" />
+    <Compile Include="Dialogs\ControlResources.et-EE.Designer.cs">
+      <DependentUpon>ControlResources.et-EE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InputCaptureControls\KeyInputCapture.Events.cs" />
+    <Compile Include="InputCaptureControls\KeyInputCaptureEventArgs.cs" />
+    <Compile Include="PdPosKeyButton.cs" />
+    <Compile Include="PdPosKeyboard.xaml.cs">
+      <DependentUpon>PdPosKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TabControlStateSelector.cs" />
+    <Compile Include="TextControls\ControlResources.et-EE.Designer.cs">
+      <DependentUpon>ControlResources.et-EE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ToggleButtonGroup.cs" />
+    <EmbeddedResource Include="DateTimeControls\ControlResources.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.et-EE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DateTimeControls\ControlResources.fi-FI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.fi-FI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DateTimeControls\ControlResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlResources.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.et-EE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextControls\ControlResources.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.et-EE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextControls\ControlResources.fi-FI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.fi-FI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextControls\ControlResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="DateTimeControls\sources\DatePicker.cs" />
+    <None Include="DateTimeControls\sources\DatePickerTextBox.cs" />
+    <Compile Include="Dialogs\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DialogButtons.cs" />
+    <Compile Include="Dialogs\DialogButtonsVisibilityConverter.cs" />
+    <Compile Include="Dialogs\Icons.cs" />
+    <Compile Include="Dialogs\ControlResources.Designer.cs">
+      <DependentUpon>ControlResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Dialogs\ControlResources.fi-FI.Designer.cs">
+      <DependentUpon>ControlResources.fi-FI.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InputCaptureControls\KeyInputCapture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TextControls\CommitKeyTextBox.xaml.cs">
+      <DependentUpon>CommitKeyTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextControls\ControlResources.Designer.cs">
+      <DependentUpon>ControlResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TextControls\ControlResources.fi-FI.Designer.cs">
+      <DependentUpon>ControlResources.fi-FI.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TextControls\InputKeyConverter.cs" />
+    <Compile Include="TextControls\TextBoxPro.cs" />
+    <EmbeddedResource Include="AnimatedControls\ControlResources.fi-FI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.fi-FI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnimatedControls\ControlResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlResources.fi-FI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.fi-FI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ControlResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="raivo-mosona.cer" />
+    <None Include="raivo-mosona.p7b" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Page Include="AnimatedControls\Block.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AnimatedControls\LoadingAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PdPosKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TextControls\CommitKeyTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DateTimeControls\sources\readme-sources.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,53 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:rmcontrols="http://schemas.rmsoft.fi/controls"
+        xmlns:local="clr-namespace:RmsoftControlsTestApp" 
+        x:Class="RmsoftControlsTestApp.CommitKeyTextBoxView"
+        mc:Ignorable="d" 
+        d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CommitKeyTextBoxView}}}">
+
+        <Grid>
+            <Grid.Resources>
+                
+                <rmcontrols:InputKeyConverter x:Key="inputKeyConverter"/>
+                
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="10" Orientation="Vertical">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="5,0,0,0">
+                        <CheckBox x:Name="isReadOnlySelector2" Content="Read only" VerticalContentAlignment="Center"/>
+                        <CheckBox Margin="0,5,0,0" x:Name="selectOnReturnKeySelector2" IsChecked="True" Content="Select on commit" VerticalContentAlignment="Center"/>
+                        <StackPanel Margin="0,5,0,0">
+                            <Label Target="{Binding ElementName=commitKeySelector}" Content="Input end key:"/>
+                            <TextBox MinHeight="23" x:Name="commitKeySelector" Text="{Binding CommitKey, Converter={StaticResource inputKeyConverter}, ElementName=textBox2, Mode=TwoWay}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <rmcontrols:CommitKeyTextBox Grid.Column="1" Margin="5,0,0,0" MinHeight="23" TabIndex="0" IsReadOnly="{Binding IsChecked, ElementName=isReadOnlySelector2}" SelectOnCommit="{Binding IsChecked, ElementName=selectOnReturnKeySelector2}" TextInput="TextBox2_TextInput" x:Name="textBox2" TextCommitted="TextBox2_TextCommitted">
+                        <rmcontrols:CommitKeyTextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding SearchCommand}" CommandParameter="{Binding SelectedInputObject}"/>
+                        </rmcontrols:CommitKeyTextBox.InputBindings>
+                    </rmcontrols:CommitKeyTextBox>
+                </Grid>
+
+            </StackPanel>
+
+            <ListBox Grid.Row="1" x:Name="readDataSelector" ItemsSource="{Binding Searches}" SelectedItem="{Binding SelectedInputObject, Mode=TwoWay}"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

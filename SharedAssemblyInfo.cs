@@ -1,9 +1,8 @@
 ﻿using System.Reflection;
 using System.Windows.Markup;
 
-//Commmon Rmsoft attributes
-[assembly: AssemblyCompany("Rmsoft")]
-[assembly: AssemblyCopyright("©2019-2021 Rmsoft Oy")]
-[assembly: AssemblyTrademark("Rmsoft™")]
+[assembly: AssemblyCompany("rmsoft")]
+[assembly: AssemblyCopyright("©2019-2023 rmsoft")]
+[assembly: AssemblyTrademark("rmsoft™")]
 
 [assembly: XmlnsPrefix("http://schemas.rmsoft.fi/controls", "rmcontrols")]

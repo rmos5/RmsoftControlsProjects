@@ -55,9 +55,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AnimatedControls\Block.xaml.cs">
       <DependentUpon>Block.xaml</DependentUpon>
     </Compile>
@@ -115,6 +112,7 @@
     <Compile Include="PdPosKeyboard.xaml.cs">
       <DependentUpon>PdPosKeyboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="TabControlStateSelector.cs" />
     <Compile Include="TextControls\ControlResources.et-EE.Designer.cs">
       <DependentUpon>ControlResources.et-EE.resx</DependentUpon>

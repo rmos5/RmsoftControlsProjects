@@ -76,9 +76,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="BehaviorsView.xaml.cs">
       <DependentUpon>BehaviorsView.xaml</DependentUpon>
     </Compile>
@@ -98,6 +95,7 @@
       <DependentUpon>Resources.fi-FI.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings2.cs" />
+    <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="SomeBindableObject.cs" />
     <Compile Include="TabControlStateSelectorView.xaml.cs">
       <DependentUpon>TabControlStateSelectorView.xaml</DependentUpon>

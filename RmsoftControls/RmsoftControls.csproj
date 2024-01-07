@@ -170,11 +170,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="TextControls\CommitKeyTextBox.xaml.cs">
       <DependentUpon>CommitKeyTextBox.xaml</DependentUpon>
     </Compile>
@@ -207,10 +202,6 @@
       <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <None Include="raivo-mosona.cer" />
     <None Include="raivo-mosona.p7b" />
   </ItemGroup>

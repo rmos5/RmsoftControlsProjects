@@ -13,6 +13,8 @@
             <rmcontrols:KeyInputCaptureItem StartKey="F11" EndKey="Return"/>
             <rmcontrols:KeyInputCaptureItem StartKey="F3" EndKey="F3"/>
             <rmcontrols:KeyInputCaptureItem StartKey="F5"/>
+            <rmcontrols:KeyInputCaptureItem StartKey="F10"/>
+            <rmcontrols:KeyInputCaptureItem StartKey="F10" StartKeyModifiers="Alt"/>
             <rmcontrols:KeyInputCaptureItem StartKey="C" StartKeyModifiers="Alt"/>
             <rmcontrols:KeyInputCaptureItem StartKey="K" StartKeyModifiers="Ctrl+Alt"/>
         </rmcontrols:KeyInputCaptureCollection>

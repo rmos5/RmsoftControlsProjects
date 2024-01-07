@@ -187,7 +187,7 @@ namespace RmsoftControls.InputCaptureControls
 
         public static readonly DependencyProperty DisableUpdateTargetsProperty =
             DependencyProperty.RegisterAttached("DisableUpdateTargets", typeof(bool), typeof(KeyInputCapture), new PropertyMetadata(false));
-        
+
         public static bool GetPassStartKeyToTargets(FrameworkElement obj)
         {
             return (bool)obj.GetValue(PassStartKeyToTargetsProperty);
@@ -517,7 +517,6 @@ namespace RmsoftControls.InputCaptureControls
             //Alt key behaves differently
             //todo: revise system key behaviors
             Key key = e.Key == Key.System
-                && e.KeyboardDevice.Modifiers == ModifierKeys.Alt
                 ? e.SystemKey
                 : e.Key;
 

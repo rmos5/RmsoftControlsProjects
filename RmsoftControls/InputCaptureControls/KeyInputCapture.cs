@@ -187,7 +187,7 @@ namespace RmsoftControls.InputCaptureControls
 
         public static readonly DependencyProperty DisableUpdateTargetsProperty =
             DependencyProperty.RegisterAttached("DisableUpdateTargets", typeof(bool), typeof(KeyInputCapture), new PropertyMetadata(false));
-        
+
         public static bool GetPassStartKeyToTargets(FrameworkElement obj)
         {
             return (bool)obj.GetValue(PassStartKeyToTargetsProperty);
@@ -226,7 +226,8 @@ namespace RmsoftControls.InputCaptureControls
                 RemoveKeyInputCapturing(obj);
             }
 
-            if (e.NewValue != null)
+            if (e.NewValue != null
+                && ((KeyInputCaptureCollection)e.NewValue).Count > 0)
             {
                 AddKeyInputCapturing(obj);
             }
@@ -235,12 +236,14 @@ namespace RmsoftControls.InputCaptureControls
         private static void AddKeyInputCapturing(FrameworkElement obj)
         {
             obj.PreviewKeyDown += OnPreviewKeyDown;
+            obj.PreviewKeyUp += OnPreviewKeyUp;
             obj.PreviewTextInput += OnPreviewTextInput;
         }
 
         private static void RemoveKeyInputCapturing(FrameworkElement obj)
         {
             obj.PreviewKeyDown -= OnPreviewKeyDown;
+            obj.PreviewKeyUp -= OnPreviewKeyUp;
             obj.PreviewTextInput -= OnPreviewTextInput;
         }
 
@@ -517,7 +520,6 @@ namespace RmsoftControls.InputCaptureControls
             //Alt key behaves differently
             //todo: revise system key behaviors
             Key key = e.Key == Key.System
-                && e.KeyboardDevice.Modifiers == ModifierKeys.Alt
                 ? e.SystemKey
                 : e.Key;
 
@@ -544,12 +546,14 @@ namespace RmsoftControls.InputCaptureControls
                 RestartInputReadingTimer(obj);
 
                 //test for end key/modifier
-                if (currentInputCapture.EndKey == e.Key && currentInputCapture.EndKeyModifiers == e.KeyboardDevice.Modifiers)
+                if (currentInputCapture.EndKey == e.Key
+                    && currentInputCapture.EndKeyModifiers == e.KeyboardDevice.Modifiers)
                 {
                     //end detected
                     EndInputReading(obj, currentInputCapture, e);
                 }
-                else if (currentInputCapture.StartKey == e.Key && currentInputCapture.StartKeyModifiers == e.KeyboardDevice.Modifiers)
+                else if (currentInputCapture.StartKey == e.Key
+                    && currentInputCapture.StartKeyModifiers == e.KeyboardDevice.Modifiers)
                 {
                     //restart reading
                     ClearInputReadings(obj);
@@ -559,6 +563,38 @@ namespace RmsoftControls.InputCaptureControls
             }
         }
 
+        private static void OnPreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            Debug.WriteLine($"{nameof(OnPreviewKeyUp)}:sender={sender};Key={e.Key};Modifiers={e.KeyboardDevice.Modifiers};{e.SystemKey}", nameof(KeyInputCapture));
+
+            FrameworkElement obj = (FrameworkElement)sender;
+
+            //input captures are not defined
+            KeyInputCaptureCollection inputCaptures = GetInputCaptureItems(obj);
+
+            //no captures defined
+            if (inputCaptures == null)
+                return;
+
+            KeyInputCaptureItem currentInputCapture = GetCurrentInputCaptureItem(obj);
+
+            //input reading for space and other special chars not coming from OnPreviewTextInput event
+            if (currentInputCapture != null)
+            {
+                string append = string.Empty;
+
+                if (e.Key == Key.Space)
+                {
+                    append = " ";
+                }
+
+                e.Handled = true;
+                string inputText = GetInputText(obj) + append;
+                SetInputText(obj, inputText);
+            }
+        }
+
+        //note: this event doesn't fire for space e.g. so we use OnPreviewKeyUp to handle this part
         private static void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Debug.WriteLine($"{nameof(OnPreviewTextInput)}:sender={sender};Text={e.Text}", nameof(KeyInputCapture));

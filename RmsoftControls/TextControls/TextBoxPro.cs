@@ -177,6 +177,7 @@ namespace RmsoftControls.TextControls
         {
             SetCurrentValue(WatermarkProperty, ControlResources.DefaultWatermarkText);
             Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
         }
 
         /// <summary>
@@ -185,6 +186,11 @@ namespace RmsoftControls.TextControls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
+            if (button != null)
+            {
+                button.Click -= Button_Click;
+            }
 
             elementContent = GetTemplateChild(ElementContentName) as ContentControl;
 
@@ -221,6 +227,14 @@ namespace RmsoftControls.TextControls
         {
             ApplyTemplate();
             ChangeVisualState(true);
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            if (button != null)
+            {
+                button.Click -= Button_Click;
+            }
         }
 
         internal static void OnVisualStatePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

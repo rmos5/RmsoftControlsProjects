@@ -127,7 +127,7 @@ namespace RmsoftControls.InputCaptureControls
         public static void SetInputCaptureTimeoutMilliseconds(FrameworkElement obj, int? value)
         {
             if (value <= 0)
-                return;
+                throw new ArgumentOutOfRangeException(nameof(value), "Timeout must be a positive value in milliseconds.");
             obj.SetValue(InputCaptureTimeoutMillisecondsProperty, value);
         }
 
@@ -273,6 +273,7 @@ namespace RmsoftControls.InputCaptureControls
         {
             Debug.WriteLine($"{nameof(AddInputCaptureTimer)}:{obj};{timeoutMilliseconds}", nameof(KeyInputCapture));
             Timer timer = new Timer(timeoutMilliseconds);
+            timer.Elapsed += InputReadingTimer_Elapsed;
             InputCaptureTimers.Add(new InputCaptureTimer(obj, timer));
         }
 
@@ -283,6 +284,7 @@ namespace RmsoftControls.InputCaptureControls
             if (item != null)
             {
                 item.Item2.Stop();
+                item.Item2.Elapsed -= InputReadingTimer_Elapsed;
                 InputCaptureTimers.Remove(item);
                 item.Item2.Dispose();
             }
@@ -294,7 +296,6 @@ namespace RmsoftControls.InputCaptureControls
             Timer timer = InputCaptureTimers.FirstOrDefault(o => o.Item1 == obj)?.Item2;
             if (timer != null)
             {
-                timer.Elapsed += InputReadingTimer_Elapsed;
                 timer.Start();
             }
         }
@@ -318,7 +319,6 @@ namespace RmsoftControls.InputCaptureControls
         {
             Debug.WriteLine($"{nameof(InputReadingTimer_Elapsed)}", nameof(KeyInputCapture));
             Timer timer = (Timer)sender;
-            timer.Elapsed -= InputReadingTimer_Elapsed;
             FrameworkElement obj = InputCaptureTimers.FirstOrDefault(o => o.Item2 == timer)?.Item1;
             obj?.Dispatcher.Invoke(() =>
             {

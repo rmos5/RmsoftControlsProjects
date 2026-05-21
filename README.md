@@ -1,20 +1,41 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# RmsoftControls
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+`RmsoftControls` is a WPF control library and sample application.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Projects
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+- `RmsoftControls/` - the reusable control library.
+- `RmsoftControlsTestApp/` - sample/test application that demonstrates control usage.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Getting Started
+
+### Prerequisites
+
+- Windows with .NET Framework developer tooling for WPF.
+- Visual Studio (or `msbuild`) capable of building legacy SDK-style `.csproj` projects.
+
+### Build
+
+From repository root:
+
+```bash
+msbuild RmsoftControlsProjects.sln /t:Build /p:Configuration=Release
+```
+
+### Run sample app
+
+Set `RmsoftControlsTestApp` as startup project in Visual Studio and run.
+
+## Package / release artifacts
+
+- NuGet spec: `RmsoftControls/RmsoftControls.nuspec`
+- Build/package helper notes: `readme-nuget.txt`
+
+## Control areas
+
+- Text controls (`RmsoftControls/TextControls`)
+- Date/time controls (`RmsoftControls/DateTimeControls`)
+- Input capture controls (`RmsoftControls/InputCaptureControls`)
+- Dialog controls (`RmsoftControls/Dialogs`)
+- Animated controls (`RmsoftControls/AnimatedControls`)
+- Behaviors (`RmsoftControls/Behaviors`)

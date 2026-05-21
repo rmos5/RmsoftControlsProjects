@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmsoftControls", "RmsoftCon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmsoftControlsTestApp", "RmsoftControlsTestApp\RmsoftControlsTestApp.csproj", "{EA488352-59C1-4BB4-8030-1132C0183039}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmsoftControls.Tests", "RmsoftControls.Tests\RmsoftControls.Tests.csproj", "{F127A6E1-5574-422D-BB57-95CD72531801}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{EA488352-59C1-4BB4-8030-1132C0183039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA488352-59C1-4BB4-8030-1132C0183039}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA488352-59C1-4BB4-8030-1132C0183039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F127A6E1-5574-422D-BB57-95CD72531801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F127A6E1-5574-422D-BB57-95CD72531801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F127A6E1-5574-422D-BB57-95CD72531801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F127A6E1-5574-422D-BB57-95CD72531801}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
